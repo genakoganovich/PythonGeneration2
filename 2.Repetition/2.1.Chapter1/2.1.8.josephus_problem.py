@@ -10,11 +10,11 @@ def solve_joseph(person, k, index):
     person.pop(index)
 
     # recursive call for n-1 persons
-    solve_joseph(person, k, index)
+    return solve_joseph(person, k, index)
 
 
 def run(n, k):
-    print(solve_joseph(list(range(n)), k, 0))
+    print((solve_joseph(list(range(n)), k - 1, 0) + 1))
 
 
 run(*map(int, [input() for _ in range(2)]))
