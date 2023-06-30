@@ -1,5 +1,3 @@
-import re
-
 s = input().replace(' ', '')
 
 result = list()
