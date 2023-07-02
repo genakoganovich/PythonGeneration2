@@ -1,3 +1,14 @@
+import numpy as np
+
+
+def swap_columns(arr, start_index, last_index):
+    arr[:, [start_index, last_index]] = arr[:, [last_index, start_index]]
+
+
+def is_symmetric(a, rtol=1e-05, atol=1e-08):
+    return np.allclose(a, a.T, rtol=rtol, atol=atol)
+
+
 def print_matrix_n(matrix, n, width=1):
     for r in range(n):
         for c in range(n):
@@ -19,7 +30,7 @@ def print_matrix(matrix, width=1):
         print()
 
 
-def read_square_matrix_rows(n):
+def read_matrix_rows(n):
     return [list(map(int, input().split())) for _ in range(n)]
 
 
