@@ -1,11 +1,11 @@
 import numpy as np
 
 
-def swap_diagonals(arr):
+def flip_diagonals(arr):
     diagonal = arr.diagonal().copy()
     anti_diagonal = np.fliplr(arr).diagonal().copy()
-    np.fill_diagonal(arr, anti_diagonal)
-    np.fill_diagonal(np.fliplr(arr), diagonal)
+    np.fill_diagonal(np.flipud(arr), diagonal)
+    np.fill_diagonal(np.flipud(np.fliplr(arr)), anti_diagonal)
 
 
 def read_matrix_rows(n):
@@ -21,12 +21,7 @@ def print_matrix(matrix, width=1):
 
 def run(n):
     a = np.array(read_matrix_rows(n))
-    diagonal = a.diagonal().copy()
-    anti_diagonal = np.fliplr(a).diagonal().copy()
-    np.fill_diagonal(a, anti_diagonal)
-    np.fill_diagonal(np.fliplr(a), diagonal)
-    print(diagonal)
-    print(anti_diagonal)
+    flip_diagonals(a)
     print_matrix(a)
 
 
