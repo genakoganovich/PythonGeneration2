@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def print_matrix(matrix, width=1):
     for r in range(len(matrix)):
         for c in range(len(matrix[0])):
@@ -8,14 +5,12 @@ def print_matrix(matrix, width=1):
         print()
 
 
-def create_matrix(n):
-    result = np.fliplr(np.eye(n, dtype=int))
-    np.fill_diagonal(result, 1)
-    return result
+def is_in(i, j, n):
+    return i <= j and i <= n - 1 - j or i >= j and i >= n - 1 - j
 
 
 def run(n):
-    print_matrix(create_matrix(n))
+    print_matrix([[[0, 1][is_in(i, j, n)] for j in range(n)] for i in range(n)])
 
 
 run(int(input()))
