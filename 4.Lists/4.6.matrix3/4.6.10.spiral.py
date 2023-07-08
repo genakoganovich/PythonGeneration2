@@ -8,23 +8,33 @@ def print_matrix(matrix, width=1):
         print()
 
 
-def populate_matrix(matrix):
+def populate_spiral(matrix, value):
+    value = populate_edges(matrix, value)
+
+    i = 1
+    while matrix[i:-i, i:-i].size:
+        value = populate_edges(matrix[i:-i, i:-i], value)
+        i += 1
 
     return matrix
 
 
+def populate_edges(matrix, value):
+    if matrix.shape[0] == 1:
+        matrix[0, :] = np.arange(value, value + matrix[0, :].size)
+        value += matrix[0, :].size
+    elif matrix.shape[1] == 1:
+        np.rot90(matrix, 1)[0, :] = np.arange(value, value + np.rot90(matrix, 1)[0, :].size)
+        value += np.rot90(matrix, 1)[0, :].size
+    else:
+        for k in range(4):
+            np.rot90(matrix, k)[0, 0:-1] = np.arange(value, value + np.rot90(matrix, k)[0, 0:-1].size)
+            value += np.rot90(matrix, k)[0, 0:-1].size
+    return value
+
+
 def run(n, m):
-    print_matrix(populate_matrix([[0] * m for _ in range(n)]), 3)
+    print_matrix(populate_spiral(np.zeros((n, m), dtype=int), 1), 3)
 
 
-# run(*(map(int, input().split())))
-
-matrix = np.array(np.arange(12).reshape((3, 4)))
-while matrix.size:
-    print(matrix)
-    if min(matrix.shape) > 1:
-        for _ in range(3):
-            matrix = np.rot90(matrix)
-            print(matrix)
-
-    matrix = matrix[1:-1, 1:-1]
+run(*(map(int, input().split())))
