@@ -1,0 +1,5 @@
+n = int(input())
+students = list(map(str.split, [input() for _ in range(n)]))
+list(map(lambda x: print(*x), students))
+print()
+list(map(lambda x: print(*x), [x for x in students if x[1] in '45']))
