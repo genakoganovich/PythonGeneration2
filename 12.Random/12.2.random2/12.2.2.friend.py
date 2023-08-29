@@ -2,6 +2,8 @@ import random
 
 n = int(input())
 students = [input() for _ in range(n)]
+friends = students[::]
+while any(s == f for s, f in zip(students, friends)):
+    random.shuffle(friends)
 
-for i in range(n):
-    print(random.choice(students[:i] + students[i + 1:]))
+list(map(lambda s, f: print(f'{s} - {f}'), students, friends))
